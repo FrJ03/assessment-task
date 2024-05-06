@@ -24,4 +24,4 @@ The domains created to exemplify the application are:
 - **Architectural Pattern:** Model-View-Controller
 <a name="license"></a>
 ## License
-[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
+[![Licence](https://img.shields.io/badge/LICENSE-GNU_GLP_v2.0-green)](./LICENSE)
