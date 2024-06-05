@@ -11,3 +11,5 @@ class View(QMainWindow):
         self.setMinimumSize(750,550)
 
         self.window = MainWindow()
+
+        self.setCentralWidget(self.window)
