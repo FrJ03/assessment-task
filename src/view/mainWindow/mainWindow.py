@@ -6,15 +6,18 @@ from PyQt5.QtWidgets import (
     QVBoxLayout
 )
 from view.footer.footer import ( Footer )
+from view.cases.cases import ( Cases )
 
 class MainWindow(QWidget):
-    def __init__(self):
+    def __init__(self, cases):
         super(MainWindow, self).__init__()
         
         layout = QVBoxLayout()
         
+        self.cases = Cases(cases)
         self.footer = Footer()
 
+        layout.addWidget(self.cases)
         layout.addStretch(1)
         layout.addWidget(self.footer)
 
