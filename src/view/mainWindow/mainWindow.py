@@ -2,14 +2,20 @@
 # -*- coding: utf-8
 
 from PyQt5.QtWidgets import (
-                                QWidget,
-                                QVBoxLayout
-                            )
+    QWidget,
+    QVBoxLayout
+)
+from view.footer.footer import ( Footer )
 
 class MainWindow(QWidget):
     def __init__(self):
         super(MainWindow, self).__init__()
         
-        self.layout = QVBoxLayout()
+        layout = QVBoxLayout()
+        
+        self.footer = Footer()
 
-        self.setLayout(self.layout)
+        layout.addStretch(1)
+        layout.addWidget(self.footer)
+
+        self.setLayout(layout)
