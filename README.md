@@ -6,7 +6,6 @@
 1. [Purpose](#purpose)
 1. [Requeriments](#requeriments)
 1. [Technologies](#technologies)
-1. [License](#license)
 <a name="purpose"></a>
 ## Purpose
 The purpose of this project is to create an application that solves assessment problems by using the CommonKADS assessment generic task independently of the problem domain.
@@ -22,6 +21,3 @@ The domains created to exemplify the application are:
 - **Programming Language:** Python
 - **Graphic Library:** PyQt5
 - **Architectural Pattern:** Model-View-Controller
-<a name="license"></a>
-## License
-[![Licence](https://img.shields.io/badge/LICENSE-GNU_GLP_v2.0-green)](./LICENSE)
