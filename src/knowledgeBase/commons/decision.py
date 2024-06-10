@@ -28,6 +28,20 @@ class Decision():
             decision (bool): new value
         """
         self._decision = decision
+    def getDecisionMade(self):
+        """Returns if the decision has been made
+
+        Returns:
+            bool: true if the decision has been made, false otherwise
+        """
+        return self._decision
+    def setDecision(self, decision: bool):
+        """Set if a decision has been made
+
+        Args:
+            decision (bool): true if the decision has been made, false otherwise
+        """
+        self._decision = decision
     def toString(self):
         """Resume the decision info into an string
 
