@@ -8,12 +8,14 @@ from PyQt5.QtWidgets import (
     QTableWidgetItem,
     QComboBox,
     QLineEdit,
-    QVBoxLayout
+    QVBoxLayout,
 )
 from PyQt5.QtGui import (
     QIntValidator,
     QDoubleValidator
 )
+
+import re
 
 class Cases(QWidget):
     def __init__(self, cases):
@@ -57,3 +59,18 @@ class Cases(QWidget):
         layout.addWidget(self.table)
 
         self.setLayout(layout)
+    
+    def getCases(self):
+        cases = []
+        for i in range (self.table.rowCount()):
+            key = self.table.item(i, 0).text()
+            valueCell = self.table.cellWidget(i, 1)
+            value = ''
+            if hasattr(valueCell, 'text'):
+                value = valueCell.text()
+            else:
+                value = valueCell.currentText()
+
+            cases.append((key, value))
+
+        return cases

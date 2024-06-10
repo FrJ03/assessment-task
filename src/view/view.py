@@ -13,6 +13,6 @@ class View(QMainWindow):
 
         controller = Controller()
 
-        self.window = MainWindow(controller.cases())
+        self.window = MainWindow(controller.cases(), controller.eventEvaluar)
 
         self.setCentralWidget(self.window)

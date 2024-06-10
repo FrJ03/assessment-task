@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (
 import sys
 
 class Footer(QWidget):
-    def __init__(self):
+    def __init__(self, evaluarHandler):
         super(Footer, self).__init__()
 
         layout = QHBoxLayout()
@@ -17,7 +17,8 @@ class Footer(QWidget):
         self.exitButton = QPushButton('Exit', self)
         self.exitButton.clicked.connect(sys.exit)
         self.evalButton = QPushButton('Evaluar', self)
-
+        self.evalButton.clicked.connect(evaluarHandler)
+        
         layout.addStretch(1)
         layout.addWidget(self.evalButton)
         layout.addWidget(self.exitButton)

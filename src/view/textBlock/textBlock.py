@@ -19,3 +19,6 @@ class TextBlock(QWidget):
         layout.addWidget(self.content)
 
         self.setLayout(layout)
+    
+    def setContent(self, content):
+        self.content.setText(content)

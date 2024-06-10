@@ -10,7 +10,7 @@ from view.cases.cases import ( Cases )
 from view.textBlock.textBlock import ( TextBlock )
 
 class MainWindow(QWidget):
-    def __init__(self, cases):
+    def __init__(self, cases, evaluarEvent):
         super(MainWindow, self).__init__()
         
         layout = QVBoxLayout()
@@ -18,7 +18,8 @@ class MainWindow(QWidget):
         self.cases = Cases(cases)
         self.decision = TextBlock('Decisión')
         self.reasoner = TextBlock('Razonamiento')
-        self.footer = Footer()
+        self.footer = Footer(self.evaluarHandler)
+        self.evaluarEvent = evaluarEvent
 
         layout.addWidget(self.cases)
         layout.addWidget(self.decision)
@@ -26,3 +27,9 @@ class MainWindow(QWidget):
         layout.addWidget(self.footer)
 
         self.setLayout(layout)
+
+    def evaluarHandler(self):
+        decision, explanation = self.evaluarEvent(self.cases.getCases())
+
+        self.decision.setContent(decision)
+        self.reasoner.setContent(explanation)
