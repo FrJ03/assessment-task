@@ -14,7 +14,7 @@ class LoanDecision(Decision):
     """
     def toString(self):
         if(self._decision):
-            message = 'Decisión: Concedidido\n\n'
+            message = 'Decisión: Concedido\n\n'
             for key, value in self._details:
                 message += f'\t{key}: {value}\n'
         else:
