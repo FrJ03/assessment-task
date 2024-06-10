@@ -35,7 +35,7 @@ class Decision():
             bool: true if the decision has been made, false otherwise
         """
         return self._decision
-    def setDecision(self, decision: bool):
+    def setDecisionMade(self, decision: bool):
         """Set if a decision has been made
 
         Args:
