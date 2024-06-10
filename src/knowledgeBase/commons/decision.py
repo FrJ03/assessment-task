@@ -56,4 +56,8 @@ class Decision():
             key (str): detail name
             value (any): detail value
         """
-        pass
+        for k, v in self._details:
+            if(k == key):
+                v = value
+                return
+        self._details.append((key, value))
