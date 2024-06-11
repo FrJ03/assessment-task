@@ -3,11 +3,13 @@
 
 from PyQt5.QtWidgets import (
     QWidget,
-    QVBoxLayout
+    QVBoxLayout,
+    QDialog
 )
 from view.footer.footer import ( Footer )
 from view.cases.cases import ( Cases )
 from view.textBlock.textBlock import ( TextBlock )
+from view.errorBox.errorBox import ( ErrorBox )
 
 class MainWindow(QWidget):
     def __init__(self, cases, evaluarEvent):
@@ -29,7 +31,20 @@ class MainWindow(QWidget):
         self.setLayout(layout)
 
     def evaluarHandler(self):
-        decision, explanation = self.evaluarEvent(self.cases.getCases())
+        cases = self.cases.getCases()
 
-        self.decision.setContent(decision)
-        self.reasoner.setContent(explanation)
+        allIntroduced = True
+
+        for i in range(len(cases)):
+            if(cases[i][1] == ''):
+                allIntroduced = False
+                break
+
+        if allIntroduced:
+            decision, explanation = self.evaluarEvent(cases)
+
+            self.decision.setContent(decision)
+            self.reasoner.setContent(explanation)
+        else:
+            error = ErrorBox('Please insert all data')
+            error.exec()
