@@ -5,15 +5,16 @@
 Class that represents the decision and its details
 '''
 class Decision():
-    def __init__(self, decision: bool = False):
+    def __init__(self, decision: bool = False, details=[]):
         """Decision class construtor
 
         Args:
             decision (bool, optional): Value that represents the decision. Defaults to False.
+            details (Array<(key, value)>, optional): Attributes for the decision. Defaults to [].
         """
         self._decision = decision
         self._decisionMade = False
-        self._details = []
+        self._details = details
     def getDecision(self):
         """Returns the status of the decision
 
