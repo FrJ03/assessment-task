@@ -62,3 +62,13 @@ class Decision():
                 v = value
                 return
         self._details.append((key, value))
+    
+    def getDetail(self, key: str):
+        """Get the detail value
+
+        Args:
+            key (str): detail name
+        """
+        for k, v in self._details:
+            if(k == key):
+                return v
