@@ -22,12 +22,12 @@ class Inferencia():
 Especificar inferencia
 """
 class Especificar(Inferencia):
-    def __init__(self, LHipotesis):
-        self.LHipotesis = LHipotesis
+    def __init__(self, valor):
+        self.valor = valor
     def execute(self):
-        LHipotesis = self.LHipotesis
-        if len(LHipotesis)> 0:
-            return LHipotesis[0]
+        valor = self.valor
+        if len(valor)> 0:
+            return valor[0]
         
 
 """
@@ -77,7 +77,7 @@ class Equiparar(Inferencia, Decision):
 """
 Function that return the cases of the domain
 """
-#terminar getcases
+
 def getCases():
     cases = dominio.getCases()
     return cases
@@ -90,8 +90,9 @@ def getCriteria():
     criteria = dominio.getCriterias()
     return criteria
 
-
-#Funcion que devuielva el resultValue del dominio seleccionado
+"""
+Function that return resultValue of the domain selected
+"""
 def inicializateResultValue(caso):
     RV = dominio.setInitialResultValue(caso)
     return RV
