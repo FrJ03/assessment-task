@@ -9,6 +9,9 @@ class ResultValue():
         """
         self._attributes = attributes
 
+    def setInitialData(self, case):
+        pass
+
     def getAttributes(self):
         """Return all the attributes of the result
 
