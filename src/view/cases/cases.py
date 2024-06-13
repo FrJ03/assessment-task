@@ -10,9 +10,10 @@ from PyQt5.QtWidgets import (
     QLineEdit,
     QVBoxLayout,
 )
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import (
     QIntValidator,
-    QDoubleValidator
+    QDoubleValidator,
 )
 
 import re
@@ -34,6 +35,7 @@ class Cases(QWidget):
 
         for i in range(len(cases)): 
             attr = QTableWidgetItem(cases[i].name)
+            attr.setFlags(attr.flags() & ~Qt.ItemFlag.ItemIsEditable)
 
             if cases[i].type == 'selectable':
                 combobox = QComboBox()
