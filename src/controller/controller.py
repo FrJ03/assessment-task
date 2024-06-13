@@ -42,7 +42,7 @@ class Controller():
 
         while(decision.getDecisionMade() == False and len(criterias) < i):
             criteria= seleccionar.execute()
-            evaluar = model.Evaluar(caseData, criteria)
+            evaluar = model.Evaluar(caseData, criteria, results)
             valor, explanation = evaluar.execute()
 
             for i in range(len(valor)):
