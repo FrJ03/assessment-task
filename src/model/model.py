@@ -22,12 +22,12 @@ class Inferencia():
 Especificar inferencia
 """
 class Especificar(Inferencia):
-    def __init__(self, valor):
-        self.valor = valor
+    def __init__(self, case):
+        self.case = case
     def execute(self):
-        valor = self.valor
-        if len(valor)> 0:
-            return valor[0]
+        case = self.case
+        criteria = dominio.getCriterias()
+        return criteria
         
 
 """
@@ -65,13 +65,13 @@ class Evaluar(Inferencia):
 Equiparar inferencia
 """
 #recibe el conjunto de valores de valor y en base a eso devuelve una decision
-class Equiparar(Inferencia, Decision):
+class Equiparar(Inferencia):
     def __init__(self, valor):
         self.valor = valor
     def execute(self):
         valor = self.valor
-        self.setDecision(valor)
-        self.setDecisionMade(True)
+        decision = Decision.loadResultValues(valor)
+        return decision
      
 
 """
