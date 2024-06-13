@@ -1,6 +1,7 @@
 from knowledgeBase.commons.decision import Decision
 from knowledgeBase.commons.case import Case
 from knowledgeBase.commons.criteria import Criteria
+from knowledgeBase.commons.resultValue import ResultValue
 
 """Client age
 """
@@ -313,6 +314,50 @@ def getCriterias():
     criterias.append(AmountCriteria())
 
     return criterias
+
+
+class LoanResultValue(ResultValue):
+    def __init__(self, values=[0, 0, 0, 0]):
+        """Constructor
+
+        Args:
+            values (Array<any>, optional): initial values of the attributes. The order is: cantidad -> duración -> interés -> cuantía mensual. Defaults to [0, 0, 0, 0]
+        """
+        attributes = [('cantidad', values[0]), ('duración', values[1]), ('interés', values[2]), ('cuantía mensual', values[3]), ('decisión', True), ('decidido', False)]
+
+        super(LoanResultValue, self).__init__(attributes)
+    
+    def setValue(self, key, value):
+        """Add or set the value. It depends of the key
+
+        Args:
+            key (str): Attribute key. Could be 'cantidad', 'duración', 'interés', 'decisión' or 'decidido'. The 'cuantía mensual' attribute can not be seted
+            value (any): Value to add or set
+        """
+        super().setValue(key, value)
+
+        if key == 'cantidad':
+            self._attributes[0][1] = value
+        elif key == 'duración':
+            self._attributes[1][1] = value
+        elif key == 'interés':
+            self._attributes[2][1] += value
+        elif key == 'decisión':
+            self._attributes[4][1] = value
+        elif key == 'decidido':
+            self._attributes[5][1] = value
+        else:
+            return
+        
+        self.recalcMonthyPayment()
+        
+    def recalcMonthyPayment(self):
+        interest = self._attributes[2][1]
+        amount = self._attributes[0][1]
+        duration = self._attributes[1][1]
+        
+        self._attributes[3][1] = (amount + (amount * ((interest) + 1) ** duration)) / 12 * duration
+            
 
 
 """Decision class for loans domain
