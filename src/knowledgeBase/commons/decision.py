@@ -57,10 +57,12 @@ class Decision():
             key (str): detail name
             value (any): detail value
         """
-        for k, v in self._details:
-            if(k == key):
-                v = value
+
+        for i in range(len(self._details)):
+            if(self._details[i][0] == key):
+                self._details[i] = (self._details[i][0], value)
                 return
+
         self._details.append((key, value))
     
     def getDetail(self, key: str):
