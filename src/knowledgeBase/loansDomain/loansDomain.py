@@ -424,14 +424,16 @@ class LoanDecision(Decision):
         else:
             return 'Decisión: Denegado'
     
-    def loadResultValue(self, value: LoanResultValue):
-        super(LoanDecision, self).loadResultValue(value)
+def loadResultValue(value: LoanResultValue):
+    decision = LoanDecision()
 
-        self.addDetail('cantidad', value.getValue('cantidad'))
-        self.addDetail('duración', value.getValue('duración'))
-        self.addDetail('interés', value.getValue('interés'))
-        self.addDetail('cuantía mensual', value.getValue('cuantía mensual'))
+    decision.addDetail('cantidad', value.getValue('cantidad'))
+    decision.addDetail('duración', value.getValue('duración'))
+    decision.addDetail('interés', value.getValue('interés'))
+    decision.addDetail('cuantía mensual', value.getValue('cuantía mensual'))
 
-        self.setDecision(value.getValue('decisión'))
-        self.setDecisionMade(value.getValue('decidido'))
+    decision.setDecision(value.getValue('decisión'))
+    decision.setDecisionMade(value.getValue('decidido'))
+
+    return decision
         
