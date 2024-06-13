@@ -2,7 +2,6 @@
 # -*- coding: utf-8
 
 from knowledgeBase.commons.decision import Decision
-from knowledgeBase.loansDomain import loansDomain
 from model import model
 
 class CaseTest:
@@ -38,14 +37,19 @@ class Controller():
         seleccionar = model.Seleccionar(criterias)
         decision: Decision = Decision()#decision vacía
         explanations = ''
+        results = model.inicializateResultValue(caseData)
         i = 0
 
         while(decision.getDecisionMade() == False and len(criterias) < i):
             criteria= seleccionar.execute()
             evaluar = model.Evaluar(caseData, criteria)
             valor, explanation = evaluar.execute()
+
+            for i in range(len(valor)):
+                results.setValue(valor[i][0], valor[i][1])
+
             explanations += f'{explanation}\n'
-            equiparar = model.Equiparar(valor)
+            equiparar = model.Equiparar(results)
             decision = equiparar.execute()
             i += 1
         
