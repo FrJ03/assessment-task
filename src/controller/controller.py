@@ -2,6 +2,8 @@
 # -*- coding: utf-8
 
 from knowledgeBase.commons.decision import Decision
+from knowledgeBase.loansDomain import loansDomain
+from model import model
 
 class CaseTest:
     def __init__(self, name, type, allowedValues=None):
@@ -19,7 +21,7 @@ class Controller():
         return
     
     def cases(self):
-        return cases
+        return model.getCases()
     
     def eventEvaluar(self, caseData):
         """event that evaluates the case
@@ -31,16 +33,20 @@ class Controller():
             str: decision
             str: explanation
         """
-        criterios = [] #obtener criterios del caso (caso)
+        especificar = model.Especificar(caseData)
+        criterias = especificar.execute()
+        seleccionar = model.Seleccionar(criterias)
         decision: Decision = Decision()#decision vacía
         explanations = ''
         i = 0
 
-        while(decision.getDecisionMade() == False and len(criterios) < i):
-            criterio= ''#seleccionar criterio(criterios, i)
-            valor, explanation = 0 #evaluar criterio (caso, criterio)
+        while(decision.getDecisionMade() == False and len(criterias) < i):
+            criteria= seleccionar.execute()
+            evaluar = model.Evaluar(caseData, criteria)
+            valor, explanation = evaluar.execute()
             explanations += f'{explanation}\n'
-            decision = Decision()#equiparar (valor)
+            equiparar = model.Equiparar(valor)
+            decision = equiparar.execute()
             i += 1
         
         #If the case has pass the loop without a decision made, the decision is true
