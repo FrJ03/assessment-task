@@ -35,14 +35,14 @@ class Decision():
         Returns:
             bool: true if the decision has been made, false otherwise
         """
-        return self._decision
+        return self._decisionMade
     def setDecisionMade(self, decision: bool):
         """Set if a decision has been made
 
         Args:
             decision (bool): true if the decision has been made, false otherwise
         """
-        self._decision = decision
+        self._decisionMade = decision
     def toString(self):
         """Resume the decision info into an string
 

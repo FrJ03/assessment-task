@@ -422,6 +422,7 @@ class LoanDecision(Decision):
             message = 'Decisión: Concedido\n\n'
             for key, value in self._details:
                 message += f'\t{key}: {value}\n'
+            return message
         else:
             return 'Decisión: Denegado'
     
