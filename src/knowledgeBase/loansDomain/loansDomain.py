@@ -138,14 +138,14 @@ class UnemployedCriteria(Criteria):
         """
         super(UnemployedCriteria, self).eval(case, value)
 
-        employmentStatus = -''
+        employmentStatus = ''
         message = f'evaluando {self.name}\n\t'
 
         values = []
 
         for i in range(len(case)):
             if(case[i][0] == 'situación laboral'):
-                employmentStatus = case[i][1]
+                employmentStatus = str(case[i][1])
         
         if(employmentStatus == ''):
             values.append(('decisión', False))
@@ -182,7 +182,7 @@ class EmploymentStatusCriteria(Criteria):
         """
         super(EmploymentStatusCriteria, self).eval(case, value)
 
-        employmentStatus = -''
+        employmentStatus = ''
         message = f'evaluando {self.name}\n\t'
 
         values = []
@@ -279,6 +279,8 @@ class AmountCriteria(Criteria):
             str: evaluation message
         """
         super(AmountCriteria, self).eval(case, value)
+
+        message = f'evaluando {self.name}\n\t'
 
         duration = -1
         debts = -1
@@ -416,7 +418,6 @@ class LoanDecision(Decision):
     """Overwrites toString method from Decision class
     """
     def toString(self):
-        self.calcInterest()
         if(self._decision):
             message = 'Decisión: Concedido\n\n'
             for key, value in self._details:
