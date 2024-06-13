@@ -88,7 +88,7 @@ class EndLoanCriteria(Criteria):
             Array<(key, values>: Result values
             str: evaluation message
         """
-        super(EncodingWarning, self).eval(case, value)
+        super(EndLoanCriteria, self).eval(case, value)
 
         clientAge = -1
         loanDuration = -1
@@ -357,15 +357,15 @@ class LoanResultValue(ResultValue):
         super().setValue(key, value)
 
         if key == 'cantidad':
-            self._attributes[0][1] = value
+            self._attributes[0] = (self._attributes[0][0], value)
         elif key == 'duración':
-            self._attributes[1][1] = value
+            self._attributes[1] = (self._attributes[1][0], value)
         elif key == 'interés':
-            self._attributes[2][1] += value
+            self._attributes[2] = (self._attributes[1][0], self._attributes[1][1] + value)
         elif key == 'decisión':
-            self._attributes[4][1] = value
+            self._attributes[4] = (self._attributes[4][0], value)
         elif key == 'decidido':
-            self._attributes[5][1] = value
+            self._attributes[5] = (self._attributes[5][0], value)
         else:
             return
         
