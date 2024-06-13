@@ -9,7 +9,7 @@ from knowledgeBase.commons.case import Case
 from knowledgeBase.commons.criteria import Criteria
 
 #Select domain
-from knowledgeBase.loansDomain import loansDomain
+from knowledgeBase.loansDomain import loansDomain as dominio
 
 
 class Inferencia():
@@ -70,17 +70,15 @@ class Equiparar(Inferencia, Decision):
         self.setDecisionMade(True)
      
 
-
-
 """
 Function that return the cases of the domain
 """
 def getCases():
     cases = []
-    cases.append(loansDomain.LoanAmount())
-    cases.append(loansDomain.LoanTerm())
-    cases.append(loansDomain.LoanInterestRate())
-    cases.append(loansDomain.LoanType())
+    cases.append(dominio.LoanAmount())
+    cases.append(dominio.LoanTerm())
+    cases.append(dominio.LoanInterestRate())
+    cases.append(dominio.LoanType())
     return cases
 
 
@@ -88,9 +86,5 @@ def getCases():
 Function that return the criteria of the domain
 """
 def getCriteria():
-    criteria = []
-    criteria.append(Criteria('LoanAmount', 'real', 'LoanAmount'))
-    criteria.append(Criteria('LoanTerm', 'natural', 'LoanTerm'))
-    criteria.append(Criteria('LoanInterestRate', 'real', 'LoanInterestRate'))
-    criteria.append(Criteria('LoanType', 'selectable', 'LoanType'))
+    criteria = dominio.getCriterias()
     return criteria
