@@ -72,3 +72,6 @@ class Decision():
         for k, v in self._details:
             if(k == key):
                 return v
+            
+    def loadResultValue(self, value):
+        pass
