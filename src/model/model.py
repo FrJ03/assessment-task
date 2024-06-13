@@ -70,7 +70,8 @@ class Equiparar(Inferencia):
         self.valor = valor
     def execute(self):
         valor = self.valor
-        decision = Decision.loadResultValues(valor)
+        decision = Decision()
+        decision.loadResultValue(valor)
         return decision
      
 
