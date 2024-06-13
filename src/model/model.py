@@ -8,6 +8,7 @@ from knowledgeBase.commons.decision import Decision
 from knowledgeBase.commons.case import Case
 from knowledgeBase.commons.criteria import Criteria
 from knowledgeBase.commons.resultValue import ResultValue
+
 #Select domain
 from knowledgeBase.loansDomain import loansDomain as dominio
 
@@ -70,8 +71,7 @@ class Equiparar(Inferencia):
         self.valor = valor
     def execute(self):
         valor = self.valor
-        decision = Decision()
-        decision.loadResultValue(valor)
+        decision = dominio.loadResultValue(valor)
         return decision
      
 
