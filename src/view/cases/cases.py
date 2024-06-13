@@ -28,8 +28,8 @@ class Cases(QWidget):
 
         self.table = QTableWidget(len(cases), 2)
 
-        self.table.setColumnWidth(0, 349)
-        self.table.setColumnWidth(1, 349)
+        self.table.setColumnWidth(0, 340)
+        self.table.setColumnWidth(1, 340)
 
         self.table.setHorizontalHeaderLabels(header)
 
