@@ -247,7 +247,7 @@ class DefaultsCriteria(Criteria):
 
         for i in range(len(case)):
             if(case[i][0] == 'número de impagos'):
-                defaults = case[i][1]
+                defaults = int(case[i][1])
         
         if(defaults == -1):
             values.append(('decisión', False))
@@ -291,13 +291,13 @@ class AmountCriteria(Criteria):
 
         for i in range(len(case)):
             if(case[i][0] == 'ingresos anuales'):
-                annualIncomes = case[i][1]
+                annualIncomes = float(case[i][1])
             elif(case[i][0] == 'deuda'):
-                debts = case[i][1]
+                debts = float(case[i][1])
             elif(case[i][0] == 'duración del préstamo'):
-                duration = case[i][1]
+                duration = int(case[i][1])
             elif(case[i][0] == 'cuantía del préstamo'):
-                amount = case[i][1]
+                amount = float(case[i][1])
 
             if(debts != -1 and annualIncomes != -1 and duration != -1 and amount != -1):
                 break
@@ -375,8 +375,10 @@ class LoanResultValue(ResultValue):
         interest = self._attributes[2][1]
         amount = self._attributes[0][1]
         duration = self._attributes[1][1]
+
+        monthlyPayment = (amount + (amount * ((interest) + 1) ** duration)) / 12 * duration
         
-        self._attributes[3][1] = (amount + (amount * ((interest) + 1) ** duration)) / 12 * duration
+        self._attributes[3] = (self._attributes[3][0], monthlyPayment)
 
 def setInitialResultValue(case):
     """Initialize a LoanResultValue
@@ -392,9 +394,9 @@ def setInitialResultValue(case):
 
     for i in range(len(case)):
         if(case[i][0] == 'duración del préstamo'):
-            duration = case[i][1]
+            duration = int(case[i][1])
         elif(case[i][0] == 'cuantía del préstamo'):
-            amount = case[i][1]
+            amount = float(case[i][1])
         
         if(duration != -1 and amount != -1):
             break
