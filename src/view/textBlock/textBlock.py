@@ -22,3 +22,6 @@ class TextBlock(QWidget):
     
     def setContent(self, content):
         self.content.setText(content)
+        
+    def clearContent(self):
+        self.content.setText('')

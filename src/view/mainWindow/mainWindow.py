@@ -41,6 +41,9 @@ class MainWindow(QWidget):
                 break
 
         if allIntroduced:
+            self.decision.clearContent()
+            self.reasoner.clearContent()
+
             decision, explanation = self.evaluarEvent(cases)
 
             self.decision.setContent(decision)
