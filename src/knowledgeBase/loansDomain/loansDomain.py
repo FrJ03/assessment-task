@@ -116,50 +116,6 @@ class EndLoanCriteria(Criteria):
             message = f'{message}Edad de finalización del préstamo válida\n'
         
         return values, message
-    
-"""Criteria for unemployed status
-"""  
-class UnemployedCriteria(Criteria):
-    def __init__(self):
-        """Constructor
-        """
-        super(UnemployedCriteria, self).__init__('cliente no desempleado')
-    
-    def eval(self, case, value):
-        """Redefinition of eval method
-
-        Args:
-            case (Array<(key,value)>): Case information
-            value (LoanResultValue): Current evaluation data
-
-        Returns:
-            Array<(key, values>: Result values
-            str: evaluation message
-        """
-        super(UnemployedCriteria, self).eval(case, value)
-
-        employmentStatus = ''
-        message = f'evaluando {self.name}\n\t'
-
-        values = []
-
-        for i in range(len(case)):
-            if(case[i][0] == 'situación laboral'):
-                employmentStatus = str(case[i][1])
-        
-        if(employmentStatus == ''):
-            values.append(('decisión', False))
-            values.append(('decidido', True))
-            message = f'{message}No se ha especificado la situación laboral del cliente\n'
-        elif (employmentStatus == 'desempleado'):
-            values.append(('decisión', False))
-            values.append(('decidido', True))
-            message = f'{message}Denegado debido a que el cliente se encuentra en situación de desempleo\n'
-        else:
-            values.append(('decisión', True))
-            message = f'{message}Situación laboral válida\n'
-        
-        return values, message
 
 """Criteria for employment status
 """
@@ -329,7 +285,6 @@ def getCriterias():
     """
     criterias = []
     criterias.append(EndLoanCriteria())
-    criterias.append(UnemployedCriteria())
     criterias.append(EmploymentStatusCriteria())
     criterias.append(DefaultsCriteria())
     criterias.append(AmountCriteria())
