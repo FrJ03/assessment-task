@@ -7,7 +7,7 @@ Description: This class is responsible for the model of the project
 from knowledgeBase.commons.decision import Decision
 from knowledgeBase.commons.case import Case
 from knowledgeBase.commons.criteria import Criteria
-
+from knowledgeBase.commons.resultValue import ResultValue
 #Select domain
 from knowledgeBase.loansDomain import loansDomain as dominio
 
@@ -46,21 +46,25 @@ class Seleccionar(Inferencia):
 """
 Evaluar inferencia
 """
+#se la pasa como parametro value
 class Evaluar(Inferencia):
-    def __init__(self, caso, criterio):
+    def __init__(self, caso, criterio, value=None):
         self.caso = caso
         self.criterio = criterio
+        self.value = value
     def execute(self):
+        #llamar a funcion eval de criteria (caso, value)
         caso = self.caso
         criterio = self.criterio
-        valor = 0
-        explicacion = ''
-        return valor, explicacion
-        
+        value = self.value
+        valor, mensaje = criterio.eval(caso, value)
+        return valor, mensaje
+
 
 """
 Equiparar inferencia
 """
+#recibe el conjunto de valores de valor y en base a eso devuelve una decision
 class Equiparar(Inferencia, Decision):
     def __init__(self, valor):
         self.valor = valor
@@ -73,12 +77,9 @@ class Equiparar(Inferencia, Decision):
 """
 Function that return the cases of the domain
 """
+#terminar getcases
 def getCases():
-    cases = []
-    cases.append(dominio.LoanAmount())
-    cases.append(dominio.LoanTerm())
-    cases.append(dominio.LoanInterestRate())
-    cases.append(dominio.LoanType())
+    cases = dominio.getCases()
     return cases
 
 
@@ -88,3 +89,9 @@ Function that return the criteria of the domain
 def getCriteria():
     criteria = dominio.getCriterias()
     return criteria
+
+
+#Funcion que devuielva el resultValue del dominio seleccionado
+def inicializateResultValue(caso):
+    RV = dominio.setInitialResultValue(caso)
+    return RV
