@@ -106,14 +106,14 @@ class EndLoanCriteria(Criteria):
         if(clientAge < 0 or loanDuration < 0):
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}No se ha especificado la edad del cliente o la duración del préstamo\n'
+            message = f'{message}No se ha especificado la edad del cliente o la duración del préstamo\n'
         elif (clientAge + loanDuration > 80):
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}Denegado debido a que la edad de finalización del préstamo es mayor a 80 años\n'
+            message = f'{message}Denegado debido a que la edad de finalización del préstamo es mayor a 80 años\n'
         else:
             values.append(('decisión', True))
-            message = '{message}Edad de finalización del préstamo válida\n'
+            message = f'{message}Edad de finalización del préstamo válida\n'
         
         return values, message
     
@@ -150,14 +150,14 @@ class UnemployedCriteria(Criteria):
         if(employmentStatus == ''):
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}No se ha especificado la situación laboral del cliente\n'
+            message = f'{message}No se ha especificado la situación laboral del cliente\n'
         elif (employmentStatus == 'desempleado'):
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}Denegado debido a que el cliente se encuentra en situación de desempleo\n'
+            message = f'{message}Denegado debido a que el cliente se encuentra en situación de desempleo\n'
         else:
             values.append(('decisión', True))
-            message = '{message}Situación laboral válida\n'
+            message = f'{message}Situación laboral válida\n'
         
         return values, message
 
@@ -194,29 +194,28 @@ class EmploymentStatusCriteria(Criteria):
         if(employmentStatus == ''):
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}No se ha especificado la situación laboral del cliente\n'
+            message = f'{message}No se ha especificado la situación laboral del cliente\n'
         elif (employmentStatus == 'desempleado'):
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}Denegado debido a que el cliente se encuentra en situación de desempleo\n'
+            message = f'{message}Denegado debido a que el cliente se encuentra en situación de desempleo\n'
         elif(employmentStatus == 'fijo'):
             values.append(('decisión', True))
             values.append(('interés', 0.02))
-            message = '{message}Situación laboral válida\n'
+            message = f'{message}Situación laboral válida\n'
         elif(employmentStatus == 'indefinido' or employmentStatus == 'autónomo/empresario'):
             values.append(('decisión', True))
             values.append(('interés', 0.025))
-            message = '{message}Situación laboral válida\n'
+            message = f'{message}Situación laboral válida\n'
         elif(employmentStatus == 'temporal'):
             values.append(('decisión', True))
             values.append(('interés', 0.035))
-            message = '{message}Situación laboral válida\n'
+            message = f'{message}Situación laboral válida\n'
         else:
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}Situación laboral incorrecta\n'
-
-        
+            message = f'{message}Situación laboral incorrecta\n'
+     
         return values, message
 
 """Criteria for the number of times that the client has not paid his debts
@@ -252,11 +251,11 @@ class DefaultsCriteria(Criteria):
         if(defaults == -1):
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}No se ha especificado el número de impagos\n'
+            message = f'{message}No se ha especificado el número de impagos\n'
         else:
             values.append(('decisión', True))
             values.append(('interés', defaults * 0.003))
-            message = '{message}Número de impagos evaluado\n'
+            message = f'{message}Número de impagos evaluado\n'
 
         return values, message
 
@@ -307,16 +306,16 @@ class AmountCriteria(Criteria):
         if(debts == -1 or annualIncomes == -1):
             values.append(('decisión', False))
             values.append(('decidido', True))
-            message = '{message}No se ha especificado el salario anual o la deuda actual\n'
+            message = f'{message}No se ha especificado el salario anual o la deuda actual\n'
         elif (monthyPayment * 12 * duration > 0.5 * ((annualIncomes * duration) - debts)):
             values.append(('decisión', False))
             values.append(('decidido', True))
 
-            message = '{message}Se ha solicitado demasiado dinero para sus posibilidades\n'
+            message = f'{message}Se ha solicitado demasiado dinero para sus posibilidades\n'
         else:
             values.append(('decisión', True))
 
-            message = '{message}El préstamo entra dentro de sus posibilidades\n'
+            message = f'{message}El préstamo entra dentro de sus posibilidades\n'
 
         return values, message
     
