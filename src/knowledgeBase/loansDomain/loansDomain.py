@@ -259,7 +259,7 @@ class AmountCriteria(Criteria):
             if(debts != -1 and annualIncomes != -1 and duration != -1 and amount != -1):
                 break
 
-        monthyPayment = (amount + (amount * ((interest) + 1) ** duration)) / 12 * duration
+        monthyPayment = (amount * ((interest + 1) ** duration)) / (12 * duration)
         
         if(debts == -1 or annualIncomes == -1):
             values.append(('decisión', False))
@@ -317,7 +317,7 @@ class LoanResultValue(ResultValue):
         elif key == 'duración':
             self._attributes[1] = (self._attributes[1][0], value)
         elif key == 'interés':
-            self._attributes[2] = (self._attributes[1][0], self._attributes[1][1] + value)
+            self._attributes[2] = (self._attributes[2][0], self._attributes[2][1] + value)
         elif key == 'decisión':
             self._attributes[4] = (self._attributes[4][0], value)
         elif key == 'decidido':
@@ -332,7 +332,7 @@ class LoanResultValue(ResultValue):
         amount = self._attributes[0][1]
         duration = self._attributes[1][1]
 
-        monthlyPayment = (amount + (amount * ((interest) + 1) ** duration)) / 12 * duration
+        monthlyPayment = (amount * ((interest + 1) ** duration)) / (12 * duration)
         
         self._attributes[3] = (self._attributes[3][0], monthlyPayment)
 
