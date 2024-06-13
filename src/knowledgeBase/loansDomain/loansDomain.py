@@ -423,20 +423,15 @@ class LoanDecision(Decision):
                 message += f'\t{key}: {value}\n'
         else:
             return 'Decisión: Denegado'
-    def addDetail(self, key: str, value):
-        super().addDetail(key, value)
+    
+    def loadResultValue(self, value: LoanResultValue):
+        super(LoanDecision, self).loadResultValue(value)
 
-        self.recalcMonthyPayment()
+        self.addDetail('cantidad', value.getValue('cantidad'))
+        self.addDetail('duración', value.getValue('duración'))
+        self.addDetail('interés', value.getValue('interés'))
+        self.addDetail('cuantía mensual', value.getValue('cuantía mensual'))
 
-    def recalcMonthyPayment(self):
-        interest = self.getDetail('interés')
-        amount = self.getDetail('cantidad')
-        monthPayPos = -1
-        duration = self.getDetail('duración')
-
-        for i in range(len(self._details)):
-            if self._details[i][0] == 'cuantía mensual':
-                monthPayPos = i
-                break
+        self.setDecision(value.getValue('decisión'))
+        self.setDecisionMade(value.getValue('decidido'))
         
-        self._details[monthPayPos][1] = (amount + (amount * ((interest) + 1) ** duration)) / 12 * duration
