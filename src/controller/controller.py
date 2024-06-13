@@ -35,12 +35,12 @@ class Controller():
         especificar = model.Especificar(caseData)
         criterias = especificar.execute()
         seleccionar = model.Seleccionar(criterias)
-        decision: Decision = Decision()#decision vacía
+        decision: Decision = None
         explanations = ''
         results = model.inicializateResultValue(caseData)
         i = 0
 
-        while(decision.getDecisionMade() == False and len(criterias) < i):
+        for i in range(len(criterias)):
             criteria= seleccionar.execute()
             evaluar = model.Evaluar(caseData, criteria, results)
             valor, explanation = evaluar.execute()
@@ -49,11 +49,13 @@ class Controller():
                 results.setValue(valor[i][0], valor[i][1])
 
             explanations += f'{explanation}\n'
+
             equiparar = model.Equiparar(results)
             decision = equiparar.execute()
-            i += 1
-        
-        #If the case has pass the loop without a decision made, the decision is true
+
+            if(decision.getDecisionMade() == True):
+                break
+
         if(decision.getDecisionMade() == False):
             decision.setDecision(True)
             decision.setDecisionMade(True)
