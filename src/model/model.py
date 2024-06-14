@@ -11,6 +11,7 @@ from knowledgeBase.commons.resultValue import ResultValue
 
 #Select domain
 from knowledgeBase.loansDomain import loansDomain as dominio
+#from knowledgeBase.recruitmentDomain import recruitmentDomain as dominio
 
 
 class Inferencia():
@@ -59,6 +60,7 @@ class Evaluar(Inferencia):
         criterio = self.criterio
         value = self.value
         valor, mensaje = criterio.eval(caso, value)
+        
         return valor, mensaje
 
 
